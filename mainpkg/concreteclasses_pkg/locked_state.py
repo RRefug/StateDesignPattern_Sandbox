@@ -1,21 +1,30 @@
-from state_informal_interface import State
-from ready_state import ReadyState
-from playing_state import PlayingState
+from mainpkg.subpkg import State
+# from ready_state import ReadyState
+# from playing_state import PlayingState
+from mainpkg.subpkg import AudioPlayer
+from mainpkg.subpkg import ReadyState
+from mainpkg.subpkg import PlayingState
+
+
 
 
 class LockedState(State):
     ''' Concrete class that extends the informal interface. '''
 
-    def __init__(self):
+    _audio_player = AudioPlayer()
+
+    def __init__(self, audioPlayer):
         '''Connects player here. '''
+        self._audio_player = audioPlayer
+
     
     def clickLock(self): 
         '''Overrides State.clickLock(). UNLOCKS the phone'''
         
-        if self.player.playing:
-            self.player.changeState(PlayingState(self.player))
+        if self._audio_player.playing:
+            self._audio_player.changeState(PlayingState(self._audio_player))
         else:
-            self.player.chanegState(ReadyState(self.player))
+            self._audio_player.changeState(ReadyState(self._audio_player))
 
     def clickPlay(self): 
         '''Overrides State.clickPlay(). Plays the song'''
