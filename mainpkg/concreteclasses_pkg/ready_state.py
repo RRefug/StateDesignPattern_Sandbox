@@ -1,7 +1,7 @@
-from mainpkg.subpkg import State
-from mainpkg.subpkg import LockedState
-from mainpkg.subpkg import PlayingState
-from mainpkg.subpkg import AudioPlayer
+from interface_pkg.state_informal_interface import State
+import context_pkg.audio_player
+import concreteclasses_pkg.locked_state
+import concreteclasses_pkg.playing_state
 
 class ReadyState(State):
     ''' Concrete class that extends the informal interface. 
@@ -10,7 +10,7 @@ class ReadyState(State):
         They can also trigger state transitions("lemme lock my phone after play my song") in the context.
     '''
 
-    _audio_player = AudioPlayer()
+    _audio_player = context_pkg.audio_player.AudioPlayer()
 
     def __init__(self, audioplayer):
         ''' Argument is an audioplayer object'''
@@ -19,12 +19,12 @@ class ReadyState(State):
 
     '''Overrides State.clickLock(). Locks the phone'''
     def clickLock(self): 
-        self._audio_player.changeState(LockedState(self._audio_player))
+        self._audio_player.changeState(concreteclasses_pkg.locked_state.LockedState(self._audio_player))
 
     '''Overrides State.clickPlay(). Plays the song'''
     def clickPlay(self): 
         self._audio_player.startPlayback()
-        self._audio_player.changeState(PlayingState(self._audio_player))
+        self._audio_player.changeState(concreteclasses_pkg.playing_state.PlayingState(self._audio_player))
 
     '''Overrides State.clickNext(). Goes to the next song'''
     def clickNext(self): 

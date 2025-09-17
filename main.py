@@ -20,11 +20,11 @@ print("Main working...")
 def main():
     player = AudioPlayer()
 
-# player.clickLock() # user unlocks the phone
-# player.clickPlay() # user plays the song
-# player.clickNext() # user plays next song
-# player.clickPrevious() # user wants to go back to the previous song
-# player.clickPlay() # user replays favorite song
+    player.clickLock() # user unlocks the phone
+    player.clickPlay() # user plays the song
+    player.clickNext() # user plays next song
+    player.clickPrevious() # user wants to go back to the previous song
+    player.clickPlay() # user replays favorite song
 
     print(player.get_audio_player_name())
 
@@ -45,4 +45,14 @@ We even understand __init__ files more. We were able to mess around with order d
 You got everything in it's own packages.
 Review co pilot notes if needed.
 Need to refactor AudioPlayer in SOME way, State is imported not even 2 lines in there.
+
+
+
+WE DID ITTTTTTT SOLUTION was to just do: 
+
+import moduleName
+
+code example:
+    moduleName.moduleClass.class_method
+
 '''

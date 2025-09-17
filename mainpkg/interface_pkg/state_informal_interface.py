@@ -1,5 +1,5 @@
 ''' THIS IS OUR ABSTRACT <<INTERACE>>>
-    However, in python no need for them... :( handles multiple inheritance)
+    However, in python no need for them... :D ( handles multiple inheritance)
 '''
 # from audio_player import AudioPlayer
 

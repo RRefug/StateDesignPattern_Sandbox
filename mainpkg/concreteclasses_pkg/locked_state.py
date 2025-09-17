@@ -1,9 +1,9 @@
-from mainpkg.subpkg import State
-# from ready_state import ReadyState
-# from playing_state import PlayingState
-from mainpkg.subpkg import AudioPlayer
-from mainpkg.subpkg import ReadyState
-from mainpkg.subpkg import PlayingState
+from interface_pkg.state_informal_interface import State
+
+
+import context_pkg.audio_player
+import concreteclasses_pkg.playing_state
+import concreteclasses_pkg.ready_state
 
 
 
@@ -11,7 +11,7 @@ from mainpkg.subpkg import PlayingState
 class LockedState(State):
     ''' Concrete class that extends the informal interface. '''
 
-    _audio_player = AudioPlayer()
+    _audio_player = context_pkg.audio_player.AudioPlayer()
 
     def __init__(self, audioPlayer):
         '''Connects player here. '''
@@ -22,9 +22,9 @@ class LockedState(State):
         '''Overrides State.clickLock(). UNLOCKS the phone'''
         
         if self._audio_player.playing:
-            self._audio_player.changeState(PlayingState(self._audio_player))
+            self._audio_player.changeState(concreteclasses_pkg.playing_state.PlayingState(self._audio_player))
         else:
-            self._audio_player.changeState(ReadyState(self._audio_player))
+            self._audio_player.changeState(concreteclasses_pkg.ready_state.ReadyState(self._audio_player))
 
     def clickPlay(self): 
         '''Overrides State.clickPlay(). Plays the song'''
