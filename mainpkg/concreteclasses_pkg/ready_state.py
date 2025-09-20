@@ -1,37 +1,37 @@
-from interface_pkg.state_informal_interface import State
-import context_pkg.audio_player
-import concreteclasses_pkg.locked_state
-import concreteclasses_pkg.playing_state
+from mainpkg.interface_pkg.state_informal_interface import State
+import mainpkg.context_pkg.audio_player
+import mainpkg.concreteclasses_pkg.locked_state
+import mainpkg.concreteclasses_pkg.playing_state
 
 class ReadyState(State):
     ''' Concrete class that extends the informal interface. 
         Methods are inherited from state informal interface, here to be implemented.
-
         They can also trigger state transitions("lemme lock my phone after play my song") in the context.
     '''
-
-    _audio_player = context_pkg.audio_player.AudioPlayer()
+    # protected variable, only want context to use. 
+    _audio_player = mainpkg.context_pkg.audio_player.AudioPlayer()
 
     def __init__(self, audioplayer):
         ''' Argument is an audioplayer object'''
         self._audio_player = audioplayer
         
-
-    '''Overrides State.clickLock(). Locks the phone'''
+    # 4 inherited overwritten methods!
     def clickLock(self): 
-        self._audio_player.changeState(concreteclasses_pkg.locked_state.LockedState(self._audio_player))
+        '''Overrides State.clickLock(). Locks the phone'''
+        self._audio_player.setState(mainpkg.concreteclasses_pkg.locked_state.LockedState(self._audio_player))
 
-    '''Overrides State.clickPlay(). Plays the song'''
     def clickPlay(self): 
+        '''Overrides State.clickPlay(). Plays the song'''
+        print('PUSHED PLAY: PLAYING CURRENT SONG')
         self._audio_player.startPlayback()
-        self._audio_player.changeState(concreteclasses_pkg.playing_state.PlayingState(self._audio_player))
-
-    '''Overrides State.clickNext(). Goes to the next song'''
+        self._audio_player.setState(mainpkg.concreteclasses_pkg.playing_state.PlayingState(self._audio_player))
+    
     def clickNext(self): 
+        '''Overrides State.clickNext(). Goes to the next song'''
         self._audio_player.nextSong()
     
-    '''Overrides State.clickPrevious(). Goes to previous song'''
     def clickPrevious(self):
+        '''Overrides State.clickPrevious(). Goes to previous song'''
         self._audio_player.previousSong()
     
     

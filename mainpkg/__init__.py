@@ -1,1 +1,1 @@
-print("mainpkg initialized...")
+print("mainpkg __init__ file initialized...")

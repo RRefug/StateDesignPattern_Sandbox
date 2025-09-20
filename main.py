@@ -1,37 +1,10 @@
-# import sys
-# from pathlib import Path
-
-# sys.path.append(str(Path(__file__).parent))
-
-
-'''
-These are relative imports
-from . import module_name (imports a module in the same directory)
-from .. import module_name (imports a module from the parent directory)
-from .subpackage import module_name (iclmports a module from a subpackage within the same directory)
-
+''' Helpful Notes about relative andn absolute paths:
+Relative import notation:
+-   from . import module_name (imports a module in the same directory)
+-   from .. import module_name (imports a module from the parent directory)
+-   from .subpackage import module_name (iclmports a module from a subpackage within the same directory)
 Better to use absolute imports. Looks a little clunky, but better for sure in being certain.
 '''
-from mainpkg.context_pkg.audio_player import AudioPlayer
-
-
-print("Main working...")
-
-def main():
-    player = AudioPlayer()
-
-    player.clickLock() # user unlocks the phone
-    player.clickPlay() # user plays the song
-    player.clickNext() # user plays next song
-    player.clickPrevious() # user wants to go back to the previous song
-    player.clickPlay() # user replays favorite song
-
-    print(player.get_audio_player_name())
-
-
-if __name__ == "__main__":
-    main()
-
 
 ''' 
 NOTE:
@@ -46,13 +19,40 @@ You got everything in it's own packages.
 Review co pilot notes if needed.
 Need to refactor AudioPlayer in SOME way, State is imported not even 2 lines in there.
 
-
-
 WE DID ITTTTTTT SOLUTION was to just do: 
 
 import moduleName
 
 code example:
     moduleName.moduleClass.class_method
-
 '''
+#from mainpkg.context_pkg.audio_player import AudioPlayer
+import mainpkg.context_pkg.audio_player
+
+def main():
+    # Audio player access checks
+    player = mainpkg.context_pkg.audio_player.AudioPlayer()
+    print('Audio Player name:', player.get_audio_player_name())
+    print(f'Playlist name: {player.get_playlist_name()}')
+
+
+    # Locked state checks (Initial state of audio player)
+    print('Current State: ', player._currentState.get_name())
+
+    # player.startPlayback() # Fails, since locked. 
+    #player.clickLock() # Unlock audio player
+
+
+    # Ready state checks (After unlocked)
+
+    # Playing state checks
+    # player.clickPlay() # user plays the song
+    # player.clickNext() # user plays next song
+    # player.clickPrevious() # user wants to go back to the previous song
+    # player.clickPlay() # user replays favorite song
+
+    # Lock state checks
+
+if __name__ == "__main__":
+    print("Main working...")
+    main()

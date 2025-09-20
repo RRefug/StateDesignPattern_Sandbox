@@ -10,15 +10,15 @@ class State:
     ''' Informal interface that acts like a real interface.
     Defines the methods that will be in AudioPlayer concrete class. '''    
     
-    #_protected_plSayer = AudioPlayer()
+    #_protected_player = AudioPlayer()
 
     def __init__(self):
         ''' No constructor'''
-        #self.player = self._protected_player
+        # self.player = self._protected_player
 
     # 4 Abstract methods, implementation needs to be added in derived concrete classes.
     def clickLock(self): 
-        '''Unlocks the phone'''
+        '''Unlocks the audioplayer (or locks it?)''' 
 
     def clickPlay(self): 
         '''Plays the song'''
